@@ -16,6 +16,13 @@
         self.selectClass = selectClass;
         self.toggleList = toggleClassesList;
 
+
+        self.isOpen = false;
+        self.availableModes = ['md-fling', 'md-scale'];
+        self.selectedMode = 'md-fling';
+        self.availableDirections = ['up', 'down', 'left', 'right'];
+        self.selectedDirection = 'up';
+
         classService
             .loadAllClasses()
             .then(function (classes) {
