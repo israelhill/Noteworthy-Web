@@ -47,9 +47,24 @@
     <md-content flex id="content">
         <h1>{{cl.selected.get("Name")}}</h1>
         <p>{{cl.selected.get("Professor")}}</p>
-        <md-button class="contact" md-no-ink ng-click="ul.showContactOptions($event)" aria-label="Professor User">
-          <md-tooltip>My Class {{ cl.selected.className }}</md-tooltip>
-        </md-button>
+
+        <div ng-controller="ClassController">
+            <md-content class="md-padding">
+                <md-card ng-repeat="it in cl.notes">
+                    <md-card-content>
+                        <h2 class="md-title">{{it.get("title")}}</h2>
+                        <p>
+                           {{it.get("description")}}
+                        </p>
+                    </md-card-content>
+                    <div class="md-actions" layout="row" layout-align="end center">
+                        <md-button>View</md-button>
+                        <md-button>Delete</md-button>
+                    </div>
+                </md-card>
+            </md-content>
+        </div>
+
       </md-content>
 
   </div>

@@ -10,6 +10,7 @@
     function ClassController($mdSidenav, classService, $q) {
         var self = this;
 
+        self.notes = [];
         self.selected = null;
         self.classes = [];
         self.selectClass = selectClass;
@@ -26,6 +27,14 @@
         function selectClass(course) {
             self.selected = angular.isNumber(course) ? $scope.classes[course] : course;
             self.toggleList();
+            var notes = [];
+            var relation = self.selected.relation("notes_for_course");
+            var query = relation.query();
+            query.each(function (note) {
+                console.log(note.get("title"))
+                notes.push(note);
+            });
+            self.notes = notes;
         }
 
         function toggleClassesList() {
