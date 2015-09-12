@@ -11,10 +11,10 @@
     <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic'>
     <link rel="stylesheet" href="./bower_components/angular-material/angular-material.css"/>
     <link rel="stylesheet" href="assets/app.css"/>
-      <script src="//www.parsecdn.com/js/parse-1.6.0.min.js"></script>
+    <script src="//www.parsecdn.com/js/parse-1.6.0.min.js"></script>
   </head>
 
-  <body ng-app="starterApp" layout="row" ng-controller="ClassController as cl" layout-fill>
+  <body ng-app="starterApp" layout="row" ng-controller="ClassController" >
 
   <md-sidenav class="site-sidenav md-sidenav-left md-whiteframe-z2"
                 md-component-id="left"
@@ -25,8 +25,8 @@
     </md-toolbar>
 
     <md-list>
-      <md-list-item ng-repeat="it in cl.classes">
-          <md-button ng-click="cl.selectClass(it)" ng-class="{'selected' : it === cl.selected }">
+      <md-list-item ng-repeat="it in classes">
+          <md-button ng-click="selectClass(it)" ng-class="{'selected' : it === selected }">
             {{it.get("Name")}}
           </md-button>
 
@@ -39,25 +39,25 @@
   <div flex layout="column" tabIndex="-1" role="main" class="md-whiteframe-z2">
 
     <md-toolbar ng-layout="row" class="md-whiteframe-z1">
-      <md-button ng-class="menu" hide-gt-sm ng-click="cl.toggleList()" aria-label="Show User List">
+      <md-button ng-class="menu" hide-gt-sm ng-click="toggleClassesList()" aria-label="Show User List">
       </md-button>
       <h1>Noteworthy</h1>
     </md-toolbar>
 
     <md-content flex id="content">
-        <h1>{{cl.selected.get("Name")}}</h1>
-        <h3>{{"Professor: " + cl.selected.get("Professor")}}</h3>
+        <h1>{{selected.get("Name")}}</h1>
+        <h3>{{"Professor: " + selected.get("Professor")}}</h3>
 
-        <div ng-controller="ClassController as cl" style='padding: 30px;'>
+        <div style='padding: 30px;'>
             <md-content>
                 <h4>Select a date to view notes.</h4>
                 <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
             </md-content>
         </div>
 
-        <div ng-controller="ClassController">
+        <div>
             <md-content class="md-padding">
-                <md-card ng-repeat="it in cl.notes">
+                <md-card ng-repeat="it in notes">
                     <md-card-content>
                         <h2 class="md-title">{{it.get("title")}}</h2>
                         <p>
@@ -72,12 +72,13 @@
             </md-content>
         </div>
 
-        <div ng-controller="ClassController as cl" layout="column">
+        <div layout="column">
+            {{notes}}
             <md-content class="md-padding" layout="column">
                 <div class="lock-size" layout="row">
-                    <md-fab-speed-dial md-open="cl.isOpen" md-direction="{{cl.selectedDirection}}"
-                                       ng-class="cl.selectedMode" ng-mouseenter="cl.isOpen=true"
-                                        ng-mouseleave="cl.isOpen=false">
+                    <md-fab-speed-dial md-open="isOpen" md-direction="{{selectedDirection}}"
+                                       ng-class="selectedMode" ng-mouseenter="isOpen=true"
+                                        ng-mouseleave="isOpen=false">
 
                         <md-fab-trigger>
                             <md-button aria-label="menu" class="md-fab md-warn">

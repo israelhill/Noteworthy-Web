@@ -12,6 +12,7 @@
     function ClassService($q){
         var classes = [];
         var query = new Parse.Query("Course");
+        console.log(query);
 
         query.each(function(item){
             classes.push(item);
@@ -21,7 +22,7 @@
         return {
             loadAllClasses : function() {
                 // Simulate async nature of real remote calls
-                return $q.when(classes);
+                return classes;
             }
         };
     }

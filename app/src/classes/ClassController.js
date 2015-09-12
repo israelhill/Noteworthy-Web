@@ -3,50 +3,49 @@
     angular
         .module('classes')
         .controller('ClassController', [
-            '$mdSidenav', 'classService', '$q',
+            '$mdSidenav', 'classService', '$q', '$scope',
             ClassController
         ]);
 
-    function ClassController($mdSidenav, classService, $q) {
-        var self = this;
+    function ClassController($mdSidenav, classService, $q, $scope) {
+        $scope.notes = [];
+        $scope.selected = null;
+        $scope.classes = [];
 
-        self.notes = [];
-        self.selected = null;
-        self.classes = [];
-        self.selectClass = selectClass;
-        self.toggleList = toggleClassesList;
-
-
-        self.isOpen = false;
-        self.availableModes = ['md-fling', 'md-scale'];
-        self.selectedMode = 'md-fling';
-        self.availableDirections = ['up', 'down', 'left', 'right'];
-        self.selectedDirection = 'down';
+        $scope.isOpen = false;
+        $scope.availableModes = ['md-fling', 'md-scale'];
+        $scope.selectedMode = 'md-fling';
+        $scope.availableDirections = ['up', 'down', 'left', 'right'];
+        $scope.selectedDirection = 'down';
 
         $q.myDate = new Date();
 
-        classService
-            .loadAllClasses()
-            .then(function (classes) {
-                self.classes = classes;
-                self.selected = classes[0];
-            });
+        $scope.classes = classService.loadAllClasses();
+        $scope.selected = $scope.classes[0];
+        console.log("im here");
 
 
-        function selectClass(course) {
-            self.selected = angular.isNumber(course) ? $scope.classes[course] : course;
-            self.toggleList();
-            var notes = [];
-            var relation = self.selected.relation("notes_for_course");
+        $scope.selectClass = function(course) {
+            $scope.selected = angular.isNumber(course) ? $scope.classes[course] : course;
+            $scope.toggleClassesList();
+
+            var relation = $scope.selected.relation("notes_for_course");
             var query = relation.query();
-            query.each(function (note) {
-                console.log(note.get("title"))
-                notes.push(note);
+            console.log("at log");
+            console.log(query);
+
+            $scope.notes = [];
+            query.each(function(note) {
+                console.log("***" , note);
+                $scope.notes.push(note);
+            }).then(function() {
+                $scope.$digest();
+                console.log($scope.notes);
             });
-            self.notes = notes;
+
         }
 
-        function toggleClassesList() {
+        $scope.toggleClassesList = function() {
             var pending = $q.when(true);
 
             pending.then(function () {
