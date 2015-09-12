@@ -44,7 +44,7 @@
       <h1>Noteworthy</h1>
     </md-toolbar>
 
-    <md-content flex id="content">
+    <md-content flex id="content" style="overflow: scroll;">
         <h1>{{selected.get("Name")}}</h1>
         <h3>{{"Professor: " + selected.get("Professor")}}</h3>
 
@@ -73,7 +73,6 @@
         </div>
 
         <div layout="column">
-            {{notes}}
             <md-content class="md-padding" layout="column">
                 <div class="lock-size" layout="row">
                     <md-fab-speed-dial md-open="isOpen" md-direction="{{selectedDirection}}"

@@ -31,16 +31,12 @@
 
             var relation = $scope.selected.relation("notes_for_course");
             var query = relation.query();
-            console.log("at log");
-            console.log(query);
 
             $scope.notes = [];
             query.each(function(note) {
-                console.log("***" , note);
                 $scope.notes.push(note);
             }).then(function() {
                 $scope.$digest();
-                console.log($scope.notes);
             });
 
         }
