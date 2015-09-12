@@ -18,8 +18,18 @@
         classService
             .loadAllClasses()
             .then(function (classes) {
+                var query = new Parse.Query("Course");
+                var course = " ";
+
+                query.find().then(function(results) {
+                    classes = results;
+                    course = classes[0];
+                    console.log(course.get('Name'));
+                    console.log(course.get('Professor'));
+                });
+
                 self.classes = [].concat(classes);
-                self.selected = classes[0];
+                self.selected = course;
             });
 
 

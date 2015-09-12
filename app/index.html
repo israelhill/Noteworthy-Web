@@ -11,6 +11,7 @@
     <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic'>
     <link rel="stylesheet" href="./bower_components/angular-material/angular-material.css"/>
     <link rel="stylesheet" href="assets/app.css"/>
+      <script src="//www.parsecdn.com/js/parse-1.6.0.min.js"></script>
   </head>
 
   <body ng-app="starterApp" layout="row" ng-controller="ClassController as cl">
@@ -26,7 +27,7 @@
     <md-list>
       <md-list-item ng-repeat="it in cl.classes">
           <md-button ng-click="cl.selectClass(it)" ng-class="{'selected' : it === cl.selected }">
-            {{it.className}}
+            {{it.get("Name")}}
           </md-button>
 
       </md-list-item>
@@ -63,6 +64,8 @@
     <script src="./src/classes/ClassService.js"></script>
 
     <script type="text/javascript">
+
+        Parse.initialize("xaWquA962LKda5zgxedPcBxVMwmtwv0tMwWAvLs4", "rEq8Fx7X2melypPqC47pvw4AVNDNJ142tk4Df2j2");
 
           angular
               .module('starterApp', ['ngMaterial', 'classes'])

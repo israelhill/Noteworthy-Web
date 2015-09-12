@@ -10,16 +10,7 @@
      * @constructor
      */
     function ClassService($q){
-        var classes = [
-            {
-                className: 'Math',
-                professor: 'Chris Butler'
-            },
-            {
-                className: 'Java',
-                professor: 'Harold Smith'
-            }
-        ];
+        var classes;
 
         // Promise-based API
         return {
