@@ -23,6 +23,8 @@
         self.availableDirections = ['up', 'down', 'left', 'right'];
         self.selectedDirection = 'down';
 
+        $q.myDate = new Date();
+
         classService
             .loadAllClasses()
             .then(function (classes) {

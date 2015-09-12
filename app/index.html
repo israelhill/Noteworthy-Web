@@ -46,7 +46,14 @@
 
     <md-content flex id="content">
         <h1>{{cl.selected.get("Name")}}</h1>
-        <p>{{cl.selected.get("Professor")}}</p>
+        <h3>{{cl.selected.get("Professor")}}</h3>
+
+        <div ng-controller="ClassController as cl" style='padding: 30px;'>
+            <md-content>
+                <h4>Select a date to view notes.</h4>
+                <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
+            </md-content>
+        </div>
 
         <div ng-controller="ClassController">
             <md-content class="md-padding">
