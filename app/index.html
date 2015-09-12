@@ -45,8 +45,8 @@
     </md-toolbar>
 
     <md-content flex id="content">
-        <h1>{{cl.selected.className}}</h1>
-        <p>{{cl.selected.professor}}</p>
+        <h1>{{cl.selected.get("Name")}}</h1>
+        <p>{{cl.selected.get("Professor")}}</p>
         <md-button class="contact" md-no-ink ng-click="ul.showContactOptions($event)" aria-label="Professor User">
           <md-tooltip>My Class {{ cl.selected.className }}</md-tooltip>
         </md-button>
