@@ -102,6 +102,14 @@ md-toolbar h1 {
   font-weight: 400;
 }
 
+md-fab-speed-dial {
+  margin: 0;
+  position: fixed;
+  top: 5%;
+  z-index: 2;
+  right: 5%;
+}
+
 .avatar {
   position: relative;
   width: 128px;

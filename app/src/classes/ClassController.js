@@ -21,7 +21,7 @@
         self.availableModes = ['md-fling', 'md-scale'];
         self.selectedMode = 'md-fling';
         self.availableDirections = ['up', 'down', 'left', 'right'];
-        self.selectedDirection = 'up';
+        self.selectedDirection = 'down';
 
         classService
             .loadAllClasses()
