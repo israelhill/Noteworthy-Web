@@ -15,7 +15,6 @@
 
         query.each(function(item){
             classes.push(item);
-            console.log("^^^" + item.get("Name"));
         });
 
         // Promise-based API

@@ -46,7 +46,7 @@
 
     <md-content flex id="content">
         <h1>{{cl.selected.get("Name")}}</h1>
-        <h3>{{cl.selected.get("Professor")}}</h3>
+        <h3>{{"Professor: " + cl.selected.get("Professor")}}</h3>
 
         <div ng-controller="ClassController as cl" style='padding: 30px;'>
             <md-content>
