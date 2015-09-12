@@ -19,7 +19,7 @@
             .loadAllClasses()
             .then(function (classes) {
                 self.classes = classes;
-                //self.selected = classes[0];
+                self.selected = classes[0];
             });
 
 
