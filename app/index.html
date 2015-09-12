@@ -76,7 +76,8 @@
             <md-content class="md-padding" layout="column">
                 <div class="lock-size" layout="row">
                     <md-fab-speed-dial md-open="cl.isOpen" md-direction="{{cl.selectedDirection}}"
-                                       ng-class="cl.selectedMode">
+                                       ng-class="cl.selectedMode" ng-mouseenter="cl.isOpen=true"
+                                        ng-mouseleave="cl.isOpen=false">
 
                         <md-fab-trigger>
                             <md-button aria-label="menu" class="md-fab md-warn">
