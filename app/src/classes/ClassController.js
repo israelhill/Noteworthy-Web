@@ -3,11 +3,11 @@
     angular
         .module('classes')
         .controller('ClassController', [
-            '$mdSidenav', 'classService', '$q', '$scope',
+            '$mdSidenav', 'classService', '$q', '$scope', '$mdDialog',
             ClassController
         ]);
 
-    function ClassController($mdSidenav, classService, $q, $scope) {
+    function ClassController($mdSidenav, classService, $q, $scope, $mdDialog) {
         $scope.notes = [];
         $scope.selected = null;
         $scope.classes = [];
@@ -48,6 +48,56 @@
                 $mdSidenav('left').toggle();
             });
         }
+
+        function DialogController($scope, $mdDialog) {
+            $scope.hide = function() {
+                $mdDialog.hide();
+            };
+            $scope.cancel = function() {
+                $mdDialog.cancel();
+            };
+            $scope.answer = function(answer) {
+                $mdDialog.hide(answer);
+            };
+        }
+
+        $scope.alert = '';
+        $scope.showAddNote = function(ev) {
+            $mdDialog.show({
+                controller: DialogController,
+                template: '<md-dialog aria-label="Form"> <md-content class="md-padding"> <form name="userForm"> <div layout layout-sm="column"> </div>' +
+                '<md-input-container flex> <label>Description</label> <input ng-model="user.description"> </md-input-container> ' +
+                '<md-input-container flex> <label>Notes</label> <textarea ng-model="user.biography" columns="1" md-maxlength="300"></textarea> </md-input-container> </form> </md-content> ' +
+                '<div class="md-actions" layout="row"> <span flex></span> ' +
+                '<md-button ng-click="answer(\'not useful\')"> Cancel </md-button> <md-button ng-click="answer(\'useful\')" class="md-primary"> Save </md-button> </div></md-dialog>',
+                targetEvent: ev,
+            })
+                .then(function(answer) {
+                    $scope.alert = 'You said the information was "' + answer + '".';
+                }, function() {
+                    $scope.alert = 'You cancelled the dialog.';
+                });
+        }
+
+        $scope.alert = '';
+        $scope.showAddClass = function(ev) {
+            $mdDialog.show({
+                controller: DialogController,
+                template: '<md-dialog aria-label="Form"> <md-content class="md-padding"> <form name="userForm"> <div layout layout-sm="column"> ' +
+                '<md-input-container flex> <label>First Name</label> <input ng-model="user.firstName"> </md-input-container> ' +
+                '<md-input-container flex> <label>Last Name</label> <input ng-model="user.lastName"> </md-input-container> </div> ' +
+                '<md-input-container flex> <label>Notes</label> <textarea ng-model="user.biography" columns="1" md-maxlength="150"></textarea> </md-input-container> </form> </md-content> ' +
+                '<div class="md-actions" layout="row"> <span flex></span> ' +
+                '<md-button ng-click="answer(\'not useful\')"> Cancel </md-button> <md-button ng-click="answer(\'useful\')" class="md-primary"> Save </md-button> </div></md-dialog>',
+                targetEvent: ev,
+            })
+                .then(function(answer) {
+                    $scope.alert = 'You said the information was "' + answer + '".';
+                }, function() {
+                    $scope.alert = 'You cancelled the dialog.';
+                });
+        }
+
     }
 
 })();
