@@ -20,7 +20,66 @@
             };
         });
 
+
     function ClassController($mdSidenav, classService, $q, $scope, $mdDialog) {
+        $scope.currentUser = Parse.User.current();
+
+        $scope.signUp = function(form) {
+            var user = new Parse.User();
+            user.set("email", form.email);
+            user.set("username", form.username);
+            user.set("password", form.password);
+
+            user.signUp(null, {
+                success: function(user) {
+                    $scope.currentUser = user;
+                    $scope.$apply(); // Notify AngularJS to sync currentUser
+                },
+                error: function(user, error) {
+                    alert("Unable to sign up:  " + error.code + " " + error.message);
+                }
+            });
+        };
+
+        $scope.login = function(form) {
+            Parse.User.logIn(form.username, form.password, {
+                success: function(user) {
+                    console.log("SUCCESFUL LOGIN", form);
+                    $scope.login = function(login) {
+                        $mdDialog.hide(login);
+                    };
+                },
+                error: function(user, error) {
+                    // The login failed. Check error to see why.
+                }
+            });
+        }
+
+        $scope.logOut = function(form) {
+            Parse.User.logOut();
+            $scope.currentUser = null;
+        };
+
+        $scope.showLogin = function(ev) {
+            $mdDialog.show({
+                controller: ClassController,
+                templateUrl: 'dialog1.tmpl.html',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose:true
+            })
+        };
+
+        $scope.showCreateAccount = function(ev) {
+            $mdDialog.show({
+                controller: ClassController,
+                templateUrl: 'dialog2.tmpl.html',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose:true
+            })
+        };
+
         $scope.notes = [];
         $scope.selected = null;
         $scope.classes = [];
@@ -35,8 +94,6 @@
 
         $scope.classes = classService.loadAllClasses();
         $scope.selected = $scope.classes[0];
-        console.log("im here");
-
 
         $scope.selectClass = function(course) {
             $scope.selected = angular.isNumber(course) ? $scope.classes[course] : course;
@@ -69,8 +126,9 @@
             $scope.cancel = function() {
                 $mdDialog.cancel();
             };
-            $scope.answer = function(answer) {
-                $mdDialog.hide(answer);
+
+            $scope.signUp = function(signUp) {
+                $mdDialog.hide(signUp);
             };
         }
 
@@ -112,6 +170,8 @@
                     $scope.alert = 'You cancelled the dialog.';
                 });
         }
+
+
 
     }
 

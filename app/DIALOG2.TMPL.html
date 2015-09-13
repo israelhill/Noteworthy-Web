@@ -1,0 +1,53 @@
+<md-dialog aria-label="Login">
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Create an Account!</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content style="max-width:800px;max-height:810px; ">
+            <div>
+                <form ng-hide="currentUser">
+                    <div layout layout-sm="column">
+                        <md-input-container flex>
+                            <label>First name</label>
+                            <input ng-model="user.firstName">
+                        </md-input-container>
+                        <md-input-container flex>
+                            <label>Last Name</label>
+                            <input ng-model="user.lastName">
+                        </md-input-container>
+                    </div>
+                    <md-input-container>
+                        <label>Username</label>
+                        <input ng-model="user.username">
+                    </md-input-container>
+                    <md-input-container>
+                        <label>Email</label>
+                        <input ng-model="user.email" type="email">
+                    </md-input-container>
+                    <md-input-container>
+                        <label>Password</label>
+                        <input ng-model="user.password" type="password">
+                    </md-input-container>
+                </form>
+
+                <div ng-show="currentUser">
+                    <h2>Welcome {{currentUser.get('username')}}</h2>
+                    <p>You are already logged in</p>
+                    <md-button ng-click="logOut()">Log out</md-button>
+                </div>
+                </body>
+            </div>
+        </md-dialog-content>
+        <div class="md-actions" layout="row">
+            <md-button class="md-primary md-raised" ng-click="signUp(user)">
+                Sign up
+            </md-button>
+        </div>
+    </form>
+</md-dialog>

@@ -31,15 +31,28 @@
                 <div>idh@gmail.com</div>
             </div>
       </md-toolbar>
+      <md-divider>
+          <h2 align="center">Classes</h2>
+      </md-divider>
 
     <md-list>
-      <md-list-item ng-repeat="it in classes">
+        <md-list-item ng-repeat="it in classes">
           <md-button ng-click="selectClass(it)" ng-class="{'selected' : it === selected }">
             {{it.get("Name")}}
           </md-button>
       </md-list-item>
     </md-list>
 
+      <div class="md-padding" id="popupContainer">
+          <div class="dialog-content" layout="row" layout-wrap >
+              <md-button class="md-primary md-raised" ng-click="showLogin($event)" flex flex-md="100">
+                  Login
+              </md-button>
+              <md-button class="md-primary md-raised" ng-click="showCreateAccount($event)" flex flex-md="100">
+                  Create Account
+              </md-button>
+          </div>
+      </div>
 
   </md-sidenav>
 
