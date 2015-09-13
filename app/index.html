@@ -22,18 +22,24 @@
                 md-component-id="left"
                 md-is-locked-open="$mdMedia('gt-sm')">
 
-    <md-toolbar class="md-whiteframe-z1">
-      <h1>Classes</h1>
-    </md-toolbar>
+      <md-toolbar class="md-hue-">
+          <span flex></span>
+            <div layout="column" class="md-toolbar-tools-bottom inset">
+                <md-icon md-svg-icon="assets/svg/avatar-1.svg" class="avatar"></md-icon>
+                <span></span>
+                <div>Israel Hill</div>
+                <div>idh@gmail.com</div>
+            </div>
+      </md-toolbar>
 
     <md-list>
       <md-list-item ng-repeat="it in classes">
           <md-button ng-click="selectClass(it)" ng-class="{'selected' : it === selected }">
             {{it.get("Name")}}
           </md-button>
-
       </md-list-item>
     </md-list>
+
 
   </md-sidenav>
 
@@ -52,9 +58,13 @@
         <h3>{{"Professor: " + selected.get("Professor")}}</h3>
 
         <div style='padding: 30px;'>
-            <md-content>
-                <h4>Select a date to view notes.</h4>
-                <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
+            <md-content class="md-padding">
+                <md-card>
+                    <md-card-content>
+                        <h4>Select a date to view notes.</h4>
+                        <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
+                    </md-card-content>
+                </md-card>
             </md-content>
         </div>
 
@@ -84,7 +94,7 @@
 
                         <md-fab-trigger>
                             <md-button aria-label="menu" class="md-fab md-warn">
-                                <md-icon md-svg-src="assets/svg/menu.svg"></md-icon>
+                                <md-icon md-svg-src="assets/svg/add.svg"></md-icon>
                             </md-button>
                         </md-fab-trigger>
                         <md-fab-actions>
