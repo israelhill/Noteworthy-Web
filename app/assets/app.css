@@ -7,6 +7,18 @@ html, body {
 }
 
 /* Toolbar area */
+/* fade animation */
+.animate-show {
+  transition: 0.75s ease-out opacity;
+  opacity: 1
+}
+
+.ng-hide {
+   height: 0;
+   min-height: 0;
+   opacity: 0;
+   overflow: hidden;
+ }
 
 .menu {
   background-color: transparent;
