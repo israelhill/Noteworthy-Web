@@ -5,7 +5,20 @@
         .controller('ClassController', [
             '$mdSidenav', 'classService', '$q', '$scope', '$mdDialog',
             ClassController
-        ]);
+        ])
+        .directive('chooseFileButton', function() {
+            return {
+                restrict: 'E',
+                link: function (scope, elem, attrs) {
+                    var button = elem.find('button');
+                    var input = elem.find('input');
+                    input.css({ display:'none' });
+                    button.bind('click', function() {
+                        input[0].click();
+                    });
+                }
+            };
+        });
 
     function ClassController($mdSidenav, classService, $q, $scope, $mdDialog) {
         $scope.notes = [];
@@ -68,12 +81,14 @@
                 template: '<md-dialog aria-label="Form"> <md-content class="md-padding"> <form name="userForm"> <div layout layout-sm="column"> </div>' +
                 '<md-input-container flex> <label>Description</label> <input ng-model="user.description"> </md-input-container> ' +
                 '<md-input-container flex> <label>Notes</label> <textarea ng-model="user.biography" columns="1" md-maxlength="300"></textarea> </md-input-container> </form> </md-content> ' +
+                '<choose-file-button> <md-button aria-label="Upload a file" class="md-raised md-primary"> Upload a Photo </md-button> <input type="file"> </choose-file-button>' +
                 '<div class="md-actions" layout="row"> <span flex></span> ' +
                 '<md-button ng-click="answer(\'not useful\')"> Cancel </md-button> <md-button ng-click="answer(\'useful\')" class="md-primary"> Save </md-button> </div></md-dialog>',
                 targetEvent: ev,
             })
                 .then(function(answer) {
                     $scope.alert = 'You said the information was "' + answer + '".';
+
                 }, function() {
                     $scope.alert = 'You cancelled the dialog.';
                 });
